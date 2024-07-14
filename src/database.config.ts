@@ -10,7 +10,7 @@ const config: TypeOrmModuleOptions = {
   password: 'btFtQPcgTDtngJwgZNbHOvgdUzNXBsXJ',
   database: 'railway',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  synchronize: true, // Solo en desarrollo, sincroniza automáticamente el esquema de la base de datos
+  synchronize: false, // Solo en desarrollo, sincroniza automáticamente el esquema de la base de datos
 };
 
 export default config;

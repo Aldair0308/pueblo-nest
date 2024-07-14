@@ -35,7 +35,7 @@ export class MesasController {
 
   // Nuevo método para encontrar una mesa por su nombre
   @Get('encontrar/:cliente')
-  async findByName(@Param('cliente') cliente: string) {
+  async findByName(@Param('cliente') cliente: string,) {
     return await this.mesasService.findHighestIdByName(cliente);
   }
 

@@ -3,6 +3,8 @@ import { MesasModule } from './mesas/mesas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductosModule } from './productos/productos.module';
 import { RondasModule } from './rondas/rondas.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { RondasModule } from './rondas/rondas.module';
       synchronize: true, // Solo en desarrollo, sincroniza automáticamente el esquema de la base de datos
     }),
     ProductosModule,
-    RondasModule
+    RondasModule,
+    UsersModule,
+    AuthModule
 
   ],
   controllers: [],

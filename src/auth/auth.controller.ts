@@ -29,7 +29,7 @@ export class AuthController {
         @Body()
         loginDto: LoginDto,
     ) {
-        return this.authService.login(loginDto);
+        return this.authService.loginWeb(loginDto);
     }
 
     @Get('profile')

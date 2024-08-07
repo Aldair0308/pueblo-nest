@@ -24,6 +24,14 @@ export class AuthController {
         return this.authService.login(loginDto);
     }
 
+    @Post('login/web')
+    loginWeb(
+        @Body()
+        loginDto: LoginDto,
+    ) {
+        return this.authService.login(loginDto);
+    }
+
     @Get('profile')
     @UseGuards(AuthGuard)
     profile(@Request() req){

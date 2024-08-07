@@ -45,4 +45,21 @@ export class AuthService {
             token
         };
     }
+    
+    async loginWeb({email, password}: LoginDto) {
+        const user = await this.usersService.findOneByEmail(email);
+        if(!user){
+            throw new UnauthorizedException('El correo es incorrecto');
+        }
+
+        const isPasswordValid = await bcriptjs.compare(password, user.password);
+        if (!isPasswordValid){
+            throw new UnauthorizedException('La contraseña es incorrecta');
+        }
+        
+
+        return {
+            user
+        };
+    }
 }

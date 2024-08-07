@@ -36,14 +36,13 @@ export class AuthService {
         if (!isPasswordValid){
             throw new UnauthorizedException('La contraseña es incorrecta');
         }
-
         
         const payload = { email: user.email };
         const token = await this.jwtService.signAsync(payload);
 
         return {
-            token,
-            user
+            user,
+            token
         };
     }
 }

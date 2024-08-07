@@ -8,6 +8,13 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { jwtConstants } from '../constants/jwt.constants';
 
+// Extensión de la interfaz Request de Express
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: any; // Define un tipo más específico si conoces la estructura del payload
+  }
+}
+
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
@@ -25,7 +32,7 @@ export class AuthGuard implements CanActivate {
         secret: jwtConstants.secret,
       });
       
-      // Attach the payload to the request object
+      // Adjunta el payload al objeto request
       request.user = payload;
       
       return true;
@@ -37,7 +44,7 @@ export class AuthGuard implements CanActivate {
   private extractTokenFromHeader(request: Request): string | null {
     const authHeader = request.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
-      return authHeader.substring(7); // Remove "Bearer " from the token
+      return authHeader.substring(7); // Elimina "Bearer " del token
     }
     return null;
   }

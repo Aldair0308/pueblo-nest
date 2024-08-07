@@ -37,12 +37,8 @@ export class AuthService {
             throw new UnauthorizedException('La contraseña es incorrecta');
         }
         
-        const payload = { email: user.email };
-        const token = await this.jwtService.signAsync(payload);
-
         return {
-            user,
-            token
+            user
         };
     }
     
@@ -58,8 +54,12 @@ export class AuthService {
         }
         
 
+        const payload = { email: user.email };
+        const token = await this.jwtService.signAsync(payload);
+
         return {
-            user
+            user,
+            token
         };
     }
 }

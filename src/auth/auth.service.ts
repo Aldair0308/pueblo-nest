@@ -36,10 +36,7 @@ export class AuthService {
         if (!isPasswordValid){
             throw new UnauthorizedException('La contraseña es incorrecta');
         }
-        
-        return {
-            user
-        };
+        return user;
     }
     
     async loginWeb({email, password}: LoginDto) {

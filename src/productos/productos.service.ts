@@ -10,7 +10,7 @@ export class ProductosService {
   constructor(
     @InjectRepository(Producto)
     private readonly productoRepository: Repository<Producto>,
-  ){}
+  ) {}
 
   async create(createProductoDto: CreateProductoDto) {
     const producto = this.productoRepository.create(createProductoDto);
@@ -41,5 +41,17 @@ export class ProductosService {
   async remove(id: number) {
     const producto = await this.findOne(id);
     return await this.productoRepository.remove(producto);
+  }
+
+  async updateStock(id: number, items: number) {
+    const producto = await this.productoRepository.findOne({ where: { id } });
+    if (!producto) {
+      throw new NotFoundException(`Producto with id ${id} not found`);
+    }
+    if (producto.stock < items) {
+      throw new Error('No hay suficiente stock para descontar');
+    }
+    producto.stock -= items;
+    return await this.productoRepository.save(producto);
   }
 }

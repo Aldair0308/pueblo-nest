@@ -39,24 +39,32 @@ export class AuthService {
         return user;
     }
     
-    async loginWeb({email, password}: LoginDto) {
+    async loginWeb({ email, password }: LoginDto) {
+        // Busca el usuario por email
         const user = await this.usersService.findOneByEmail(email);
-        if(!user){
-            throw new UnauthorizedException('El correo es incorrecto');
+        if (!user) {
+          throw new UnauthorizedException('El correo es incorrecto');
         }
-
+    
+        // Verifica la contraseña
         const isPasswordValid = await bcriptjs.compare(password, user.password);
-        if (!isPasswordValid){
-            throw new UnauthorizedException('La contraseña es incorrecta');
+        if (!isPasswordValid) {
+          throw new UnauthorizedException('La contraseña es incorrecta');
         }
-        
-
-        const payload = { email: user.email };
-        const token = await this.jwtService.signAsync(payload);
-
-        return {
-            user,
-            token
+    
+        // Prepara el payload del token incluyendo la propiedad rol
+        const payload = { 
+          email: user.email,
+          rol: user.rol // Incluye la propiedad rol en el payload
         };
-    }
+    
+        // Firma el token con el payload
+        const token = await this.jwtService.signAsync(payload);
+    
+        // Devuelve el usuario y el token
+        return {
+          user,
+          token
+        };
+      }
 }

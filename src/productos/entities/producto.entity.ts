@@ -17,4 +17,7 @@ export class Producto {
 
     @Column({ default: 'Normal' }) // Descripción por defecto: 'Normal'
     descripcion: string;
+
+    @Column({ type: 'int', default: 0 }) // Agregar la columna de stock
+    stock: number;
 }

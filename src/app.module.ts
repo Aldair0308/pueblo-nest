@@ -5,6 +5,7 @@ import { ProductosModule } from './productos/productos.module';
 import { RondasModule } from './rondas/rondas.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { AbonoModule } from './abono/abono.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     ProductosModule,
     RondasModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    AbonoModule
 
   ],
   controllers: [],

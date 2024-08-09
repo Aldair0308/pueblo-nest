@@ -62,4 +62,23 @@ export class AbonoService {
       return { message: `Abono with ID ${id} has been removed` };
     }
   }
+
+  async deactivateByMesaId(idMesa: number) {
+    // Find all abonos with the given mesaId and where activo is true
+    const abonos = await this.abonoRepository.find({
+      where: { mesaId: idMesa, activo: true },
+    });
+
+    if (abonos.length === 0) {
+      throw new NotFoundException(`No active abonos found for mesa ID ${idMesa}`);
+    }
+
+    // Set activo to false for all found abonos
+    abonos.forEach(abono => {
+      abono.activo = false;
+    });
+
+    // Save all updated abonos
+    return await this.abonoRepository.save(abonos);
+  }
 }

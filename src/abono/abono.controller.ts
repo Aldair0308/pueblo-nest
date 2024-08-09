@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AbonoService } from './abono.service';
 import { CreateAbonoDto } from './dto/create-abono.dto';
 import { UpdateAbonoDto } from './dto/update-abono.dto';
@@ -9,7 +9,6 @@ export class AbonoController {
 
   @Post()
   create(@Body() createAbonoDto: CreateAbonoDto) {
-    
     return this.abonoService.create(createAbonoDto);
   }
 
@@ -31,5 +30,10 @@ export class AbonoController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.abonoService.remove(+id);
+  }
+
+  @Put('usar/:idMesa')
+  async deactivateAbonosByMesaId(@Param('idMesa') idMesa: number) {
+    return this.abonoService.deactivateByMesaId(idMesa);
   }
 }

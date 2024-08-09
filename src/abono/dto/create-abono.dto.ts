@@ -12,7 +12,7 @@ export class CreateAbonoDto {
   @IsDate()
   @IsOptional()
   @IsNotEmpty()
-  fecha: Date;
+  fecha?: string;
 
   @IsNumber()
   @IsNotEmpty()

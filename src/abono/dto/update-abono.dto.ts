@@ -13,7 +13,7 @@ export class UpdateAbonoDto extends PartialType(CreateAbonoDto) {
 
   @IsOptional()
   @IsDate()
-  fecha?: Date;
+  fecha?: string;
 
   @IsOptional()
   @IsNumber()

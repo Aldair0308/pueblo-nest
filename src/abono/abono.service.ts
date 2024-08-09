@@ -93,4 +93,17 @@ export class AbonoService {
 
     return abonos;
   }
+
+  async getSubtotalByMesaId(idMesa: number): Promise<number> {
+    const abonos = await this.abonoRepository.createQueryBuilder('abono')
+      .select('SUM(abono.monto)', 'subtotal')
+      .where('abono.mesaId = :idMesa', { idMesa })
+      .getRawOne();
+
+    if (!abonos || !abonos.subtotal) {
+      throw new NotFoundException(`No abonos found for mesa ID ${idMesa}`);
+    }
+
+    return parseFloat(abonos.subtotal);
+  }
 }

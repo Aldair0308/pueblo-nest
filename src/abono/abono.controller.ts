@@ -41,4 +41,9 @@ export class AbonoController {
   async findByMesaId(@Param('idMesa') idMesa: number) {
     return this.abonoService.findByMesaId(idMesa);
   }
+
+  @Get('mesa/subtotal/:idMesa')
+  async getSubtotalByMesaId(@Param('idMesa') idMesa: number) {
+    return this.abonoService.getSubtotalByMesaId(idMesa);
+  }
 }

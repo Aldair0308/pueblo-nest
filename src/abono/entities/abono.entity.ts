@@ -11,7 +11,7 @@ export class Abono {
   @Column()
   descripcion: string;
 
-  @Column()
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
 
   @Column()

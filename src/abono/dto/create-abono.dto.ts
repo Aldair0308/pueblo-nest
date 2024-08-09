@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsDate, IsNotEmpty } from 'class-validator';
+import { IsNumber, IsString, IsDate, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateAbonoDto {
   @IsNumber()
@@ -10,6 +10,7 @@ export class CreateAbonoDto {
   descripcion: string;
 
   @IsDate()
+  @IsOptional()
   @IsNotEmpty()
   fecha: Date;
 

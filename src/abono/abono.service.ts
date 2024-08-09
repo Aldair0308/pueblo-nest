@@ -95,15 +95,15 @@ export class AbonoService {
   }
 
   async getSubtotalByMesaId(idMesa: number): Promise<number> {
-    const abonos = await this.abonoRepository.createQueryBuilder('abono')
+    const result = await this.abonoRepository.createQueryBuilder('abono')
       .select('SUM(abono.monto)', 'subtotal')
       .where('abono.mesaId = :idMesa', { idMesa })
       .getRawOne();
-
-    if (!abonos || !abonos.subtotal) {
-      throw new NotFoundException(`No abonos found for mesa ID ${idMesa}`);
-    }
-
-    return parseFloat(abonos.subtotal);
+  
+    // Verificar si la propiedad subtotal es null o undefined, y devolver 0 si es el caso
+    const subtotal = result?.subtotal ? parseFloat(result.subtotal) : 0;
+  
+    return subtotal;
   }
+  
 }

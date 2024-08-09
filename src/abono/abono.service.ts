@@ -81,4 +81,16 @@ export class AbonoService {
     // Save all updated abonos
     return await this.abonoRepository.save(abonos);
   }
+
+  async findByMesaId(idMesa: number) {
+    const abonos = await this.abonoRepository.find({
+      where: { mesaId: idMesa },
+    });
+
+    if (abonos.length === 0) {
+      throw new NotFoundException(`No abonos found for mesa ID ${idMesa}`);
+    }
+
+    return abonos;
+  }
 }

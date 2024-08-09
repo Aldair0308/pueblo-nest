@@ -36,4 +36,9 @@ export class AbonoController {
   async deactivateAbonosByMesaId(@Param('idMesa') idMesa: number) {
     return this.abonoService.deactivateByMesaId(idMesa);
   }
+  
+  @Get('mesa/:idMesa')
+  async findByMesaId(@Param('idMesa') idMesa: number) {
+    return this.abonoService.findByMesaId(idMesa);
+  }
 }

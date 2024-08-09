@@ -29,6 +29,8 @@ export class RondasService {
     const ronda = this.rondaRepository.create(createRondaDto);
     return await this.rondaRepository.save(ronda);
   }
+
+
   
 
   async findAll() {
